@@ -6,7 +6,6 @@ public class TestII{
     ExII exs = new ExII();
     System.out.println("Introduza qual alinea quer: ");
     int alinea = ler.nextInt();
-    ler.nextInt();
     switch(alinea) {
                  case 1: System.out.println("Indique o valor que quer converter: ");
                  double valC = ler.nextInt();
