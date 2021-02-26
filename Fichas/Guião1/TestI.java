@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.*;
 
 public class TestI{
   public static void main(String [] args){
@@ -19,7 +20,6 @@ public class TestI{
                          System.out.println("A data que inseriu corresponde a um/uma "+ exs.DiadaSemana(diaS) + ".\n");
                  break;
                  case 2: System.out.println("Introduza a primeira data: ");
-                         int maxA,minA;
                          int dia1 = ler.nextInt();
                          int mes1 = ler.nextInt();
                          int ano1 = ler.nextInt();
@@ -28,18 +28,26 @@ public class TestI{
                          int mes2 = ler.nextInt();
                          int ano2 = ler.nextInt();
                          ler.close();
-                         if(ano1 > ano2) { maxA = ano1%100; minA = ano2%100;
-                         }else {
-                           maxA = ano2%100; minA = ano1%100;
+                         ano1%=100; ano2%=100;
+                         int ind = Math.min((ano1),(ano2));
+                         int total = 0;
+                         if(ind == ano2) { total = exs.converter(dia1+dia2,mes1+mes2,ano1,ind);
+                         }else { total = exs.converter(dia1+dia2,mes1+mes2,ano2,ind);
                          }
-                         int minM = exs.minimo(mes1,mes2); 
-                         int total = exs.converter(dia1+dia2,mes1+mes2,minM,maxA,minA);
                          System.out.println((total)+"D"+" "+((total)*24)+"H"+" "+((total)*1440)+"M"+" "+((total)*86400)+"S");
                  break;
                  case 3: System.out.println("Introduza as classificações: ");
                  break;
-                 case 4: System.out.println("Digite pelo menos duas temperaturas: ");
-                 System.out.println("A média das _n_ temperaturas foi de ____ graus.\n A maior variação registou-se entre os dias __ e __, tendo a temperatura subido/descido3 ___graus.");
+                 case 4: System.out.println("Quantas temperaturas vai querer comparar: ");
+                         int length = ler.nextInt();
+                         int[] temperaturas= new int[length];
+                         for(int i=0;i<length;i++){
+                           System.out.println("Digite a sua temperatura: ");
+                           temperaturas[i] = ler.nextInt();
+                         }
+                         ler.close();
+                         int[] vals = exs.calcTemp(temperaturas,length);
+                         System.out.println("A média das "+length+" temperaturas foi de "+ ((IntStream.of(temperaturas).sum()) /2) +" graus.\nA maior variação registou-se entre os dias "+vals[1]+"  e "+vals[2]+", tendo a temperatura subido/descido "+vals[0]+" graus.");
                  break;
                  case 5: System.out.println("Indique para quais dois valores quer receber decrescentemente e também quer saber a sua média: ");
                  break;
@@ -50,7 +58,7 @@ public class TestI{
                          System.out.println("Os valores primos do valor" +" são: " + Arrays.toString(list) + ".\n");
                  break;
                  case 7: System.out.println("Indique a sua data de nascimento (dia mês ano): ");
-                 System.out.println("A sua idade atual em horas corresponde a " +". Realizado às " + ".\n");
+                         System.out.println("A sua idade atual em horas corresponde a " +". Realizado às " + ".\n");
                  break;
                  default: 
                  break;
