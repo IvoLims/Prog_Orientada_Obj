@@ -21,9 +21,27 @@ public class ExI{
                 }
                 return "None.";
        }
-       public int minimo(int a, int b){
-              if(a>b) return b;
-              else return a;
+       static int diasDoMesN[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+       static int diasDoMesB[] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+       public static int[] maxArray(int[] temps,int length){
+         int[] lista = new int[2];
+         lista[1] = temps[0];
+         for(int i = 1; i<length;i++){
+             if (temps[i] > lista[1]){
+             lista[1] = temps[i]; lista[0] = i;
+             }
+         }
+         return lista;
+       }
+       public static int[] minArray(int[] temps,int length){
+         int[] lista = new int[2];
+         lista[1] = temps[0];
+         for(int i = 1; i<length;i++){
+             if (temps[i] < lista[1]){
+             lista[1] = temps[i]; lista[0] = i;
+             }
+         }
+         return lista;
        }
        public static int[] addElement(int len, int arr[], int x){ 
                      int i;
@@ -45,25 +63,34 @@ public class ExI{
               }
               return novo % 7;
        }
-       public int converter(int dia,int mes,int minM, int maxA, int minA){
+       public int converter(int dia,int mes, int maxA, int minA){
               int val=0;
+              int i = 0;
               while(maxA>minA){
                 if(maxA%4 == 0) val+=366;
                 else val+=365;
                 maxA--;
               }
-              for(int i = minM;i<mes-1;i++){ // melhorar aqui
-              if(maxA%4 == 0 && i == 2) {val+=29;}
-              else {val+=28;
-              }
-              if(i==1 || i==3 || i==5 || i==7 || i==8 || i==10 || i==12) val+=31;
-              else val+=30;
-              System.out.println(val);
-              System.out.println(maxA);
-              maxA--;
+              while(i<mes-1){
+              //for(int i = minM;i<mes;i++){ // melhorar aqui
+                    if(minA%4 != 0){val+=diasDoMesN[i];} 
+                    else {val+=diasDoMesB[i];}
+              minA++;
+              i++;
               }
               return val+dia;
             }
+      public int[] calcTemp(int[] temp, int length){
+             int[] list = new int[3];
+             int[] list1 = new int[2];
+             int[] list2 = new int[2];
+             list1 = minArray(temp,length);
+             list2 = maxArray(temp,length);
+             list[0] = list2[1] - list1[1];
+             list[1] = list2[0];
+             list[2] = list1[0];
+             return list;
+      }
       public int[] primos(int val){
              int[] list = new int[val];
              int i = 1, num = 0, size=0;
