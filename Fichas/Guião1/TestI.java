@@ -57,3 +57,5 @@ public class TestI{
                 }
   }
 }
+
+//Comandos usados 'javac TestI.java' para compilar e depois 'java TestI' para testar.
