@@ -47,4 +47,4 @@ public class TestII{
   }
 }
 
-//Comandos usados 'javac TestII.java' e depois 'java TestII'
+//Comandos usados 'javac TestII.java' para compilar e depois 'java TestII' para testar.
