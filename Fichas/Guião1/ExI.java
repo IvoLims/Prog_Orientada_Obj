@@ -81,14 +81,13 @@ public class ExI{
               return val+dia;
             }
       public int[] calcTemp(int[] temp, int length){
-             int[] list = new int[3];
+             int[] list = new int[1];
              int[] list1 = new int[2];
-             int[] list2 = new int[2];
-             list1 = minArray(temp,length);
-             list2 = maxArray(temp,length);
-             list[0] = list2[1] - list1[1];
-             list[1] = list2[0];
-             list[2] = list1[0];
+             list = (minArray(temp,length));
+             list1 = (maxArray(temp,length));
+             list[2] = list[0];
+             list[0] = list1[1] - list[1];
+             list[1] = list1[0];
              return list;
       }
       public int[] primos(int val){
