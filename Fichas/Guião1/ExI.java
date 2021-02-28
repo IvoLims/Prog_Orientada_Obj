@@ -72,9 +72,8 @@ public class ExI{
                 maxA--;
               }
               while(i<mes-1){
-              //for(int i = minM;i<mes;i++){ // melhorar aqui
-                    if(minA%4 != 0){val+=diasDoMesN[i];} 
-                    else {val+=diasDoMesB[i];}
+                if(minA%4 != 0){val+=diasDoMesN[i];} 
+                else {val+=diasDoMesB[i];}
               minA++;
               i++;
               }
