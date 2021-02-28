@@ -8,7 +8,7 @@ import java.util.*;
 import java.io.*;
 
 public class ExI{
-       //aux's
+       // Aux's
        public String DiadaSemana(int diaS){
               switch(diaS) {
                             case 0: return "Domingo";
@@ -52,7 +52,8 @@ public class ExI{
                      newarr[len] = x; 
                
                      return newarr; 
-                 } 
+                 }
+       // Principais
        public int SaberData(int dia,int mes, int ano){
               int novo = (ano-1900)*365;  // para dar certo deveria ser 'int novo =(int) ((ano-1900)*365.25)'
               if(ano%4 == 0 && mes < 3) novo--;
