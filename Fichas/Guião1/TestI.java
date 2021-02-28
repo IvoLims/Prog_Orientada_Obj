@@ -55,12 +55,12 @@ public class TestI{
                          int val = ler.nextInt();
                          ler.close();
                          int[] list = exs.primos(val); 
-                         System.out.println("Os valores primos do valor" +" são: " + Arrays.toString(list) + ".\n");
+                         System.out.println("Os valores primos do valor "+ val +" são: " + Arrays.toString(list) + ".\n");
                  break;
                  case 7: System.out.println("Indique a sua data de nascimento (dia mês ano): ");
                          System.out.println("A sua idade atual em horas corresponde a " +". Realizado às " + ".\n");
                  break;
-                 default: 
+                 default: System.out.println("Essa alínea não existe, tente outra.");
                  break;
                 }
   }
