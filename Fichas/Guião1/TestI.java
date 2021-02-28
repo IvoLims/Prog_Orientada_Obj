@@ -36,7 +36,16 @@ public class TestI{
                          }
                          System.out.println((total)+"D"+" "+((total)*24)+"H"+" "+((total)*1440)+"M"+" "+((total)*86400)+"S");
                  break;
-                 case 3: System.out.println("Introduza as classificações: ");
+                 case 3: System.out.println("Quantas classificações vai querer comparar: ");
+                         int size = ler.nextInt();
+                         int[] classif= new int[size];
+                         for(int i=0;i<size;i++){
+                            System.out.println("Digite a classificação: ");
+                            classif[i] = ler.nextInt();
+                          }
+                          ler.close();
+                          int[] nClass = exs.mergeClass(classif,size);
+                          System.out.println("Entre o intervalo de [0, 5[ são "+nClass[0] +", já entre [5, 10[ existe/existem "+nClass[1]+", entre [10, 15[ são "+nClass[2]+" e finalmente entre [15, 20] existe/existem "+nClass[3]+ ".\n");
                  break;
                  case 4: System.out.println("Quantas temperaturas vai querer comparar: ");
                          int length = ler.nextInt();
