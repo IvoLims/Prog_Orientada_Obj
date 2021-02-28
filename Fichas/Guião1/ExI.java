@@ -19,7 +19,7 @@ public class ExI{
                             case 5: return "Sexta-feira";
                             case 6: return "Sábado";
                 }
-                return "None.";
+                return "None";
        }
        static int diasDoMesN[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
        static int diasDoMesB[] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
@@ -80,6 +80,18 @@ public class ExI{
               }
               return val+dia;
             }
+      public int[] mergeClass(int[] classif,int size){
+             int[] total = {0,0,0,0};
+             int i=0;
+             while (i<size){
+               if(classif[i]>=0 && classif[i]<5) total[0]+=1;
+               else if (classif[i]>=5 && classif[i]<10) total[1]+=1;
+               else if (classif[i]>=10 && classif[i]<15) total[2]+=1;
+               else total[3]+=1;
+             i++;
+             }
+             return total;
+      }
       public int[] calcTemp(int[] temp, int length){
              int[] list = new int[1];
              int[] list1 = new int[2];
