@@ -115,7 +115,6 @@ public class ExI{
 	                if (counter ==2){
                       size++;
 	                    list = addElement(size,list, i);
-                      System.out.println(list);
 	                }	
               }
               return list;
