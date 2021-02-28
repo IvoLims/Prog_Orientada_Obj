@@ -56,7 +56,7 @@ public class TestI{
                          }
                          ler.close();
                          int[] vals = exs.calcTemp(temperaturas,length);
-                         System.out.println("A média das "+length+" temperaturas foi de "+ ((IntStream.of(temperaturas).sum()) /2) +" graus.\nA maior variação registou-se entre os dias "+vals[1]+"  e "+vals[2]+", tendo a temperatura subido/descido "+vals[0]+" graus.");
+                         System.out.println("A média das "+length+" temperaturas foi de "+ ((IntStream.of(temperaturas).sum()) /2) +" graus.\nA maior variação registou-se entre os dias "+(vals[2]+=1)+"  e "+(vals[1]+=1)+", tendo a temperatura subido/descido "+vals[0]+" graus.");
                  break;
                  case 5: System.out.println("Indique para quais dois valores quer receber decrescentemente e também quer saber a sua média: ");
                  break;
