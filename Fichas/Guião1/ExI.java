@@ -102,6 +102,15 @@ public class ExI{
              list[1] = list1[0];
              return list;
       }
+      public String areaPer(String line){
+             String[] vales = line.split(" ");
+             float base = Float.parseFloat(vales[0]);
+             float alt = Float.parseFloat(vales[1]);
+             float area = (base*alt)/2;
+             float hip = (float)Math.sqrt((alt*alt)+(base*base));
+             float peri = hip+base+alt;
+             return ""+String.format("%.5g%n", area)+" e "+String.format("%.5g%n", peri)+"";
+      }
       public int[] primos(int val){
              int[] list = new int[val];
              int i = 1, num = 0, size=0;
