@@ -3,6 +3,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.FileInputStream;
 
 public class TestI{
   public static void main(String [] args){
@@ -58,7 +62,17 @@ public class TestI{
                          int[] vals = exs.calcTemp(temperaturas,length);
                          System.out.println("A média das "+length+" temperaturas foi de "+ ((IntStream.of(temperaturas).sum()) /2) +" graus.\nA maior variação registou-se entre os dias "+(vals[2]+=1)+"  e "+(vals[1]+=1)+", tendo a temperatura subido/descido "+vals[0]+" graus.");
                  break;
-                 case 5: System.out.println("Indique para quais dois valores quer receber decrescentemente e também quer saber a sua média: ");
+                 case 5: System.out.println("Insira um valor real para a base e a altura do triângulo: "); 
+                         try{BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+                          String line;
+                          String num;
+                          while ((line = reader.readLine()) != null){
+                              if (line.contains("0.0")) {break;}
+                              num = exs.areaPer(line);
+                              System.out.println("A área e o perímetro do triângulo são "+num);
+                              System.out.println("Insira um valor real para a base e a altura do triângulo: "); 
+                          }
+                          } catch (IOException e) { e.printStackTrace(); }
                  break;
                  case 6: System.out.println("Indique um nº inteiro: ");
                          int val = ler.nextInt();
