@@ -149,7 +149,7 @@ public class ExI{
              int maxA = Math.max(nascimento[2],year);
              int minA = Math.min(nascimento[2],year);
              int maxM = Math.max(nascimento[1],month);
-             if (year != nascimento[2]){
+             if (year != nascimento[2] || month != nascimento[1]){
                  while(maxA>minA){
                    if(maxA%4 == 0) val+=(366*24);
                    else val+=(365*24);
