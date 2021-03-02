@@ -86,8 +86,8 @@ public class TestI{
                              nascimento[i] = ler.nextInt();
                          }
                          ler.close();
-                         int[] lista = exs.nasciHora(nascimento);
-                         System.out.println("A sua idade atual em horas corresponde a "+lista[0] +". Este calculo foi realizado às "+lista[1]+" do dia " +lista[2]+".\n");
+                         String[] lista = exs.nasciHora(nascimento);
+                         System.out.println("A sua idade atual em horas corresponde a "+lista[0] +". Este calculo foi realizado a "+lista[1]+".\n");
                  break;
                  default: System.out.println("Essa alínea não existe, tente outra.");
                  break;
