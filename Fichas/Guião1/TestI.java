@@ -23,7 +23,7 @@ public class TestI{
                          int diaS=exs.SaberData(dia,mes,ano);
                          System.out.println("A data que inseriu corresponde a um/uma "+ exs.DiadaSemana(diaS) + ".\n");
                  break;
-                 case 2: System.out.println("Introduza a primeira data: ");
+                 case 2: System.out.println("Introduza a primeira data: "); // Esta captura podia ter sido feita num array (como foi feito na 7) o que facilitaria as coisas ¯\_(ツ)_/¯, agora já está feito.
                          int dia1 = ler.nextInt();
                          int mes1 = ler.nextInt();
                          int ano1 = ler.nextInt();
@@ -81,7 +81,13 @@ public class TestI{
                          System.out.println("Os valores primos do valor "+ val +" são: " + Arrays.toString(list) + ".\n");
                  break;
                  case 7: System.out.println("Indique a sua data de nascimento (dia mês ano): ");
-                         System.out.println("A sua idade atual em horas corresponde a " +". Realizado às " + ".\n");
+                        int nascimento[] = new int[3];
+                         for(int i=0;i<3;i++){
+                             nascimento[i] = ler.nextInt();
+                         }
+                         ler.close();
+                         int[] lista = exs.nasciHora(nascimento);
+                         System.out.println("A sua idade atual em horas corresponde a "+lista[0] +". Este calculo foi realizado às "+lista[1]+" do dia " +lista[2]+".\n");
                  break;
                  default: System.out.println("Essa alínea não existe, tente outra.");
                  break;
