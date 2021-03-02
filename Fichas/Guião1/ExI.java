@@ -6,6 +6,9 @@ import java.lang.Object;
 import java.lang.*;
 import java.util.*;
 import java.io.*;
+import java.util.Date;
+import java.time.LocalDate;
+import java.util.Calendar;
 
 public class ExI{
        // Aux's
@@ -128,9 +131,38 @@ public class ExI{
               }
               return list;
       }
-      public int[] nasciHora(int[] nascimento){
-             int[] calculo = new int[3];
-           
-             return calculo;
-    }
+      public String[] nasciHora(int[] nascimento){
+             String[] calculo = new String[2];
+             int val=0;
+             int i=0;
+             Date date = new Date();
+             Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Paris"));
+             cal.setTime(date);
+             int year = cal.get(Calendar.YEAR);
+             int month = cal.get(Calendar.MONTH);
+             month+=1;
+             int day = cal.get(Calendar.DAY_OF_MONTH);
+             int hour = cal.get(Calendar.HOUR_OF_DAY);
+             int minutes = cal.get(Calendar.MINUTE);
+             calculo[1] = ""+day+" do "+month+" de "+year+" às "+hour+":"+minutes;
+             int difd = Math.abs((day-nascimento[0])*24);
+             int maxA = Math.max(nascimento[2],year);
+             int minA = Math.min(nascimento[2],year);
+             int maxM = Math.max(nascimento[1],month);
+             if (year != nascimento[2]){
+                 while(maxA>minA){
+                   if(maxA%4 == 0) val+=(366*24);
+                   else val+=(365*24);
+                   maxA--;
+                 }while(i<maxM-1){
+                   if(minA%4 != 0){val+=diasDoMesN[i]*24;} 
+                   else {val+=diasDoMesB[i]*24;}
+                  minA++;
+                  i++;
+                  }
+            }
+            val+=difd;
+            calculo[0] = String.valueOf(val);
+            return calculo;
+     }
 }
