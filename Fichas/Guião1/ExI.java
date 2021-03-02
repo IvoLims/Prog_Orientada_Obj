@@ -128,4 +128,9 @@ public class ExI{
               }
               return list;
       }
+      public int[] nasciHora(int[] nascimento){
+             int[] calculo = new int[3];
+           
+             return calculo;
+    }
 }
