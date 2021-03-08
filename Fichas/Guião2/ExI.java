@@ -98,6 +98,7 @@ public class ExI{
        }
        // Não 100% certa
        public String[] repetidos(String[] array2,int len){
+              String[] rep = new String[len+1];
               for (int i = 1, k=0; i < len; i++) {
                    for (int j = i + 1 ; j < len; j++) {
                         if (array2[i].equals(array2[j])) {
