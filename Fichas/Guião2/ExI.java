@@ -11,6 +11,36 @@ import java.time.LocalDate;
 import java.util.Calendar;
 
 public class ExI{
+
+       public int minInt(int[] array){
+              int min = array[0];
+              for(int i = 0; i< array.length;i++)
+                  if(array[i]<min) min = array[i];
+              return min;
+       }
+       public int[] limites(int[] array, int numsinf,int numsup){
+              int[] res = new int [array.length];
+              for(int i = numsinf,k=0; i<=numsup ;i++,k++){
+                  res[k] = array[i];
+              }
+              return res;
+       }
+       public int[] compInt(int[] array1,int[] array2){
+              int[] iguais = new int [array1.length];
+              boolean[] seen = new boolean[array1.length];
+              for (int i = 0, k = 0; i < array1.length; i++,k++){
+                   if(seen[i]) continue;
+                   boolean duplicate = false;
+                   for (int j = 0; j < array2.length; j++){
+                        if (array1[i] == array2[j]){
+                            duplicate = seen[j] = true;
+                        }
+                    }
+                    if(duplicate) 
+                        iguais[k] = array1[i];
+                    }
+              return iguais;
+       }
        
        public String ordena(int[] array){
               for (int i = 1; i < array.length; i++) {
@@ -51,7 +81,7 @@ public class ExI{
               i++;
               }
               return ""+ cont +"";
-       }/*String[] semRep = Arrays.stream(array2).distinct().toArray(s -> new String[s]); elimina repetidos*/
+       }/*String[] rep = Arrays.stream(array2).distinct().toArray(s -> new String[s]); elimina repetidos*/
        public String maior(String[] array2,int len){
               if(len == 1){
                 return ""+ array2[1] +"";
@@ -68,7 +98,6 @@ public class ExI{
        }
        // Não 100% certa
        public String[] repetidos(String[] array2,int len){
-              String[] rep = new String[len+1];
               for (int i = 1, k=0; i < len; i++) {
                    for (int j = i + 1 ; j < len; j++) {
                         if (array2[i].equals(array2[j])) {
