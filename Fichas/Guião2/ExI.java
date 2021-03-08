@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.Calendar;
 
 public class ExI{
+       
        public String ordena(int[] array){
               for (int i = 1; i < array.length; i++) {
                    for (int j = 0; j < i; j++) {
@@ -37,5 +38,53 @@ public class ExI{
                          inf = meio+1;
               }
               return " não existe";
+       }
+       public String comparar(String[] array2,int len){
+              int cont=len-1;
+              int i = 1, j=2;
+              if(len == 1){
+                return ""+ cont +"";
+              }
+              while(i<len){
+                for(;j < len; j++)
+                       if(array2[i].equals(array2[j]) && (i != j))     cont-=1;
+              i++;
+              }
+              return ""+ cont +"";
+       }/*String[] semRep = Arrays.stream(array2).distinct().toArray(s -> new String[s]); elimina repetidos*/
+       public String maior(String[] array2,int len){
+              if(len == 1){
+                return ""+ array2[1] +"";
+              }
+              int index = 1;
+              int maior = array2[1].length();
+              for(int i = 1 ; i<len;i++){
+                  if(array2[i].length() > maior) {
+                    index=i; maior = array2[i].length();
+                  }
+              }
+
+              return ""+array2[index]+"";
+       }
+       // Não 100% certa
+       public String[] repetidos(String[] array2,int len){
+              String[] rep = new String[len+1];
+              for (int i = 1, k=0; i < len; i++) {
+                   for (int j = i + 1 ; j < len; j++) {
+                        if (array2[i].equals(array2[j])) {
+                            System.arraycopy(array2, j, rep, k, 1);
+                            k+=1;
+                        }
+                   }
+              }
+              return rep;
+       }
+       public int vOcorre(String[] array2,int len, String verificar){
+              int res = 0;
+              for (int i = 1; i < len; i++) {
+                        if (array2[i].equals(verificar)) res+=1;
+              }
+              return res;
+
        }
 }
