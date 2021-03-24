@@ -54,17 +54,17 @@ public class Ex42{
        public int getOrderN() {           
               return this.orderN;       
        }
-       public void setOrderN(int orderN) {                                   
+       public void setOrderN(int orderN) {
               this.orderN = orderN;       
        }
        public LocalDate getDate() {           
               return this.date;       
        }
-       public void setDate(LocalDate date) {                            
+       public void setDate(LocalDate date) {
               this.date = date;       
        }
-       public ArrayList<LinhaEncomenda> getEncomendas() {           
-              return this.encomendas;       
+       public ArrayList<LinhaEncomenda> getEncomendas() {
+               return this.encomendas;       
        }
        //Work here
        public void setEncomendas(ArrayList<LinhaEncomenda> encomendas){           
@@ -75,6 +75,19 @@ public class Ex42{
               return 12;
        }
 
+       public double calculaValorDesconto(){
+              return 12;
+       }
+       public int numeroTotalProdutos(){
+              return 2;
+       }
+       public boolean existeProdutoEncomenda(String refProduto){
+              return true;
+       }
+       public void adicionaLinha(LinhaEncomenda linha) {
+       }
+       public void removeProduto(String codProd){
+       }
        public String toString() {
               final StringBuffer sb = new StringBuffer("\n");
               sb.append("\nNome fornecido: ").append(name).append("\n");
@@ -83,7 +96,7 @@ public class Ex42{
               sb.append("Número de encomenda fornecido: ").append(orderN).append("\n");
               sb.append("Data fornecido: ").append(date.toString()).append("\n");
               sb.append("Encomendas: ").append(encomendas.toString()).append("\n");
-              sb.append("}");
+              sb.append("\n");
               return sb.toString();
        }
        public Ex42 clone() {
@@ -95,5 +108,4 @@ public class Ex42{
               Ex42 that = (Ex42) o;
               return this.nif == that.nif && this.orderN == that.orderN && this.name.equals(that.name) &&  this.adress.equals(that.adress) && this.date.equals(that.date) && this.encomendas.equals(that.encomendas);
     }
-
 }
