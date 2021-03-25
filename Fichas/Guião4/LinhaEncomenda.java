@@ -138,10 +138,10 @@ public class LinhaEncomenda {
         StringBuilder sb = new StringBuilder("\nO seu pedido foi:\n");
         sb.append("\nReferência: ").append(this.referencia).append("\n");
         sb.append("Descrição: ").append(descricao).append("\n");
-        sb.append("Preço antes de impostos: ").append(preco).append("\n");
+        sb.append("Preço: ").append(preco).append("\n");
         sb.append("Quantidade encomendada: ").append(quantidade).append("\n");
         sb.append("Imposto: ").append(String.format("%.2f%%",imposto)).append("\n");
-        sb.append("Desconto comercial: ").append(String.format("%.2f%%",desconto));
+        sb.append("Desconto: ").append(String.format("%.2f%%",desconto));
         return sb.toString();
     }            
 }
