@@ -1,6 +1,6 @@
 /*********************************************************************************/
 /** DISCLAIMER: Este cÃ³digo foi criado e alterado durante as aulas prÃ¡ticas      */
-/** de POO. Representa uma soluÃ§Ã£o em construÃ§Ã£o, com base na matÃ©ria leccionada */
+/** de POO. Representa uma soluÃ§Ã£o em construÃ§Ã£o, com base na matÃ©ria leccionada */ 
 /** atÃ© ao momento da sua elaboraÃ§Ã£o, e resulta da discussÃ£o e experimentaÃ§Ã£o    */
 /** durante as aulas. Como tal, nÃ£o deverÃ¡ ser visto como uma soluÃ§Ã£o canÃ³nica,  */
 /** ou mesmo acabada. Ã‰ disponibilizado para auxiliar o processo de estudo.      */
@@ -25,7 +25,7 @@ public class LinhaEncomenda {
     private int quantidade;
     private double imposto;
     private double desconto;
-
+    
     public LinhaEncomenda() {
         this.referencia = "n/a";
         this.descricao = "n/a";
@@ -34,7 +34,7 @@ public class LinhaEncomenda {
         this.imposto = 0;
         this.desconto = 0;
     }
-
+    
     public LinhaEncomenda(String referencia, String descricao, double preco, int quantidade, double imposto, double desconto) {
         this.referencia = referencia;
         this.descricao = descricao;
@@ -43,7 +43,7 @@ public class LinhaEncomenda {
         this.imposto = imposto;
         this.desconto = desconto;
     }
-
+    
     public LinhaEncomenda(LinhaEncomenda linha) {
         this.referencia = linha.getReferencia();
         this.descricao = linha.getDescricao();
@@ -52,7 +52,7 @@ public class LinhaEncomenda {
         this.imposto = linha.getImposto();
         this.desconto = linha.getDesconto();
     }
-
+    
     /**
      * B)
      */
@@ -62,7 +62,7 @@ public class LinhaEncomenda {
         valor *= 1+this.imposto;
         return valor;
     }
-
+    
     /**
      * C)
      */
@@ -70,13 +70,13 @@ public class LinhaEncomenda {
         double valor = this.quantidade * this.preco;
         valor *= this.imposto; //e.g. imposto = 1.06
         return this.calculaValorLinhaEnc()-valor;
-    }
-
+    }  
+    
     public String getReferencia() {
         return this.referencia;
     }
-
-    public void setReferencia(String referencia) {
+    
+     public void setReferencia(String referencia) {
         this.referencia = referencia;
     }
 
@@ -123,17 +123,17 @@ public class LinhaEncomenda {
     public LinhaEncomenda clone() {
         return new LinhaEncomenda(this);
     }
-
+    
     public boolean equals(Object obj) {
         if(obj==this) return true;
         if(obj==null || obj.getClass() != this.getClass()) return false;
         LinhaEncomenda le = (LinhaEncomenda) obj;
         return le.getReferencia().equals(this.referencia) &&
-                le.getDescricao().equals(this.descricao) &&
-                le.getPreco() == this.preco;
+              le.getDescricao().equals(this.descricao) && 
+              le.getPreco() == this.preco;
     }
     /*Recentemente feitas*/
-
+    
     public String toString() {
         StringBuilder sb = new StringBuilder("\nO seu pedido foi:\n");
         sb.append("\nReferência: ").append(this.referencia).append("\n");
@@ -143,5 +143,5 @@ public class LinhaEncomenda {
         sb.append("Imposto: ").append(String.format("%.2f%%",imposto)).append("\n");
         sb.append("Desconto: ").append(String.format("%.2f%%",desconto));
         return sb.toString();
-    }
+    }            
 }
