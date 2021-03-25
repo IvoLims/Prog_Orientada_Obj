@@ -1,16 +1,16 @@
 import java.util.Scanner;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Test {
        public static void main(String [] args){
               Scanner ler = new Scanner(System.in);
-              Ex42 exs = new Ex42("Ótima Átila Dantas", 12345678, "Rua Escadinhas da Porta do Carro", 665, LocalDateTime.now(), new ArrayList<LinhaEncomenda>());
+              Ex42 exs = new Ex42("Ótima Átila Dantas", 12345678, "Rua Escadinhas da Porta do Carro", 665, LocalDate.now(), new ArrayList<LinhaEncomenda>());
               System.out.println("\nA sua encomenda foi criada com os seguintes dados: " + exs.toString());
-              LinhaEncomenda line1 = new LinhaEncomenda("11111", "Revista Maria", 5, 1, 6, 10);
+              LinhaEncomenda line1 = new LinhaEncomenda("11111", "Revista Maria", 5, 1, 6, 0);
               exs.adicionaLinha(line1);
               System.out.println("Inserido na linha de encomenda: " + line1.toString()+"\n");
-              LinhaEncomenda line2 = new LinhaEncomenda("22222", "Perninhas de Morcego Recheadas", 20, 3, 15, 17.5);
+              LinhaEncomenda line2 = new LinhaEncomenda("22222", "Perninhas de Morcego Recheadas", 10, 8, 25, 0.5);
               exs.adicionaLinha(line2);
               System.out.println("" + line2.toString()+"\n");
               System.out.println("Introduza qual método quer testar: ");
@@ -45,7 +45,7 @@ public class Test {
                                       System.out.println(codProd);
                                       ler.close();
                                       exs.removeProduto(codProd);
-                                      System.out.println("O produto com o código "+codProd+", "+exs.existeProdutoEncomenda(codProd)+" foi removido.\n");
+                                      System.out.println("O produto com o código "+codProd+", "+exs.existeProdutoEncomenda(codProd)+" existe.\n");
                               break;
                               }
                               default:{
