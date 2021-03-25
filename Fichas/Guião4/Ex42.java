@@ -66,7 +66,6 @@ public class Ex42{
        public ArrayList<LinhaEncomenda> getEncomendas() {
                return this.encomendas;       
        }
-       //Work here
        public void setEncomendas(ArrayList<LinhaEncomenda> encomendas){
               this.encomendas = new ArrayList<>();
               for(LinhaEncomenda l : encomendas) {
@@ -121,4 +120,5 @@ public class Ex42{
               Ex42 that = (Ex42) o;
               return this.nif == that.nif && this.orderN == that.orderN && this.name.equals(that.name) &&  this.adress.equals(that.adress) && this.date.equals(that.date) && this.encomendas.equals(that.encomendas);
     }
+
 }
