@@ -41,10 +41,10 @@ public class Test42 {
                               break;
                               }
                               case 7:{
-                                      System.out.println("\nQual é o código do produto que quer remover?\n");
-                                      String codProd = ler.nextLine();
+                                      System.out.println("\nQual é o código do produto que quer remover?");
+                                      String codProd = ler.next();
                                       ler.close();
-                                      //exs.removeProduto(String codProd);
+                                      exs.removeProduto(codProd);
                                       System.out.printf("O produto com o código "+codProd+", "+exs.existeProdutoEncomenda(codProd)+" foi removido.\n");
                               break;
                               }
