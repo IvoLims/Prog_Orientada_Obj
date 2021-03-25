@@ -7,7 +7,7 @@ public class Test42 {
               Scanner ler = new Scanner(System.in);
               Ex42 exs = new Ex42("Ótima Átila Dantas", 12345678, "Rua Escadinhas da Porta do Carro", 665, LocalDate.now(), new ArrayList<LinhaEncomenda>());
               System.out.println("\nA sua encomenda foi criada com os seguintes dados: " + exs.toString());
-              LinhaEncomenda linha1 = new LinhaEncomenda("11111", "Revista Maria", 1, 5, 6, 10);
+              LinhaEncomenda linha1 = new LinhaEncomenda("11111", "Revista Maria", 5, 1, 6, 10);
               exs.adicionaLinha(linha1);
               System.out.println("Inserido na linha de encomenda: " + linha1.toString()+"\n");
               LinhaEncomenda linha2 = new LinhaEncomenda("22222", "Perninhas de Morcego Recheadas", 20, 3, 15, 17.5);
@@ -33,8 +33,8 @@ public class Test42 {
                               break;
                               }
                               case 5:{
-                                      System.out.println("\nQual é a referência do produto procura?\n");
-                                      String refProduto = ler.nextLine();
+                                      System.out.println("\nQual é a referência do produto procura?");
+                                      String refProduto = ler.next();
                                       ler.close();
                                       System.out.println("Podemos confirmar que o produto que procura, "+exs.existeProdutoEncomenda(refProduto)+" existe.\n");
 
