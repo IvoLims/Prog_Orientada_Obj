@@ -117,6 +117,8 @@ public class Ex42{
               return new Ex42(this);
        }
        public boolean equals(Object o) {
+              if (this == o) return true;
+              if (o == null || this.getClass() != o.getClass()) return false;
               Ex42 that = (Ex42) o;
               return this.nif == that.nif && this.orderN == that.orderN && this.name.equals(that.name) &&  this.adress.equals(that.adress) && this.date.equals(that.date) && this.encomendas.equals(that.encomendas);
     }
