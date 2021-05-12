@@ -1,5 +1,4 @@
-package com.company;
-
+import java.time.Duration;
 import java.time.LocalTime;
 import java.util.Arrays;
 
@@ -27,7 +26,6 @@ public class Youtube {
     this.reaction[likes] = 0;
     this.reaction[dislikes] = 0;
 }
-
 public Youtube(String vName, char[] video, int[] duration, int resolution, int min, int sec) {
     this.vName = new String(vName);
     this.video = new char[video.length];
@@ -38,6 +36,28 @@ public Youtube(String vName, char[] video, int[] duration, int resolution, int m
     this.reaction[likes] = 0;
     this.reaction[dislikes] = 0;
     this.comments = new String[0];
+}
+public void insereComentario(String comment){
+        String[] comments = this.getComments();
+        String[] newComment = new String[comments.length+1];
+        System.arraycopy(comments,0,newComment,0,comments.length);
+        newComment[comments.length] = new String(comment);
+        this.setComments(newComment);
+}
+public long qtsDiasDepois(){
+        LocalTime estreia = this.getDate();
+        LocalTime atual = LocalTime.now();
+        return Duration.between(estreia,atual).toDays();
+}
+public void thumbsUp(){
+        int i = getNlikes();
+        this.setNlikes(i+1);
+}
+public String processa(){
+        StringBuilder s = new StringBuilder();
+        String[] vid = this.getVideo();
+        for(String i :vid) s.append(i);
+        return s.toString();
 }
 public String toString(){
     StringBuffer sb = new StringBuffer();
