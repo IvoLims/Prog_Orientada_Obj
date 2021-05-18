@@ -1,5 +1,3 @@
-package casainteligente;
-
 public class SmartSpeaker extends SmartDevice {
     public static final int MAX = 25;
 
