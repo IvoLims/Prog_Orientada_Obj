@@ -1,5 +1,3 @@
-package casainteligente;
-
 /*********************************************************************************/
 /** DISCLAIMER: Este código foi criado e alterado durante as aulas práticas      */
 /** de POO. Representa uma solução em construção, com base na matéria leccionada */ 
