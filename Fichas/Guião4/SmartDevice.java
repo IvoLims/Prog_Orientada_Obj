@@ -1,5 +1,3 @@
-package casainteligente;
-
 public class SmartDevice {
     private String id;
     private boolean on;
