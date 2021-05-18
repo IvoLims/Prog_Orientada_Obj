@@ -1,5 +1,3 @@
-package casainteligente;
-
 public class SmartBulb extends SmartDevice {
     public static final int WARM = 3;
     public static final int NEUTRAL = 2;
