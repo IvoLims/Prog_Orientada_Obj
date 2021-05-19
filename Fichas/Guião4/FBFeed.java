@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 public class FBFeed {
     private ArrayList<FBPost> posts;
-  
 public FBFeed(ArrayList<FBPost> list){
     this.posts = new ArrayList<FBPost>();
     for(FBPost elem : list){
@@ -103,7 +102,7 @@ public List<Integer> top5CommentsExt() {
            for(FBPost post : copy)
                if(mostCommented == null || mostCommented.getComments().size() < post.getComments().size())
                   mostCommented = post;
-           top5.add(mostCommented.getID());
+           top5.add(mostCommented.getId());
            copy.remove(mostCommented);
        }
        return top5;
