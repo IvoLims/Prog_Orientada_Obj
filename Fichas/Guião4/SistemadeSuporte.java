@@ -1,10 +1,12 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SistemadeSuporte {
     ArrayList<PedidodeSuporte> pedidos;
-    
+
     public SistemadeSuporte(ArrayList<PedidodeSuporte> ps){
         this.pedidos = new ArrayList<PedidodeSuporte>();
         for(PedidodeSuporte elem : ps)
@@ -38,16 +40,30 @@ public class SistemadeSuporte {
         return sb.toString();
     }
     public void inserePedido(PedidodeSuporte pedido){
-
+        this.pedidos.add(pedido.clone());
     }
     public PedidodeSuporte procuraPedido(String user, LocalDateTime data){
-
+        PedidodeSuporte p = this.pedidos.stream().filter(a->a.getName().equals(user) && a.getDate().equals(data)).findFirst().orElse(null);
+        return p;
     }
     public void resolvePedido(PedidodeSuporte pedido,String tecnico, String info){
-
+        boolean enc = false;
+        int i;
+        for(i=0; !enc && i<this.pedidos.size(); i++){
+            enc = this.pedidos.get(i).equals(pedido);
+        }if(enc){
+            i--;
+        } else{
+            this.pedidos.add(pedido);
+            i = this.pedidos.size() - 1;
+        }
+        pedido.setNtratou(tecnico);
+        pedido.setInformacao(info);
+        pedido.setConcluido(LocalDate.now());
+        this.pedidos.set(i,pedido);
     }
     public List<PedidodeSuporte> resolvidos(){
-
+        return this.pedidos.stream().filter(a->a.getNtratou().equals("")).collect(Collectors.toList());
     }
     public String colaboradorTop(){
 
