@@ -5,17 +5,28 @@ public class Lugar implements Comparable<Lugar>{
     private String name;
     private int min;
     private boolean perm;
-
-    public Lugar(Lugar l) {
-        
+    
+    public Lugar(){
+        this.matricula = "";
+        this.name = "";
+        this.min = 0;
+        this.perm = true;
     }
-
-    public boolean equals(Object o) { 
+    public Lugar(String matricula, String name, int min, boolean perm) { 
+        this.matricula = matricula;
+        this.name = name;
+        this.min = min;
+        this.perm = perm;
+    }
+    public Lugar(Lugar l) {
+        this(l.matricula,l.name,l.min, l.perm);
+    }
+    public boolean equals(Object o) {
         if(this == o) return true;
         if(o == null && this.getClass() != o.getClass()) return false;
         Lugar l = (Lugar) o;
         return this.matricula.equals(l.matricula) && this.name.equals(name) &&
-               this.min == l.min && this.perm == l.perm; 
+               this.min == l.min && this.perm == l.perm;
     }
     /*or
     public boolean equals(Object o) {
@@ -31,7 +42,7 @@ public class Lugar implements Comparable<Lugar>{
         sb.append("\nName: ").append(this.name);
         sb.append("\nTempo: ").append(this.min).append(" min\n");
         sb.append("Lugar permanente: ").append(this.perm);
-        return sb.toString();        
+        return sb.toString();
     }
     public Lugar clone(){
         return new Lugar(this);
