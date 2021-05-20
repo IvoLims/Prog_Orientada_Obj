@@ -1,11 +1,17 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 
 public class SistemadeSuporte {
     ArrayList<PedidodeSuporte> pedidos;
+    private List<PedidodeSuporte> DoubleStream;
 
     public SistemadeSuporte(ArrayList<PedidodeSuporte> ps){
         this.pedidos = new ArrayList<PedidodeSuporte>();
@@ -66,27 +72,50 @@ public class SistemadeSuporte {
         return this.pedidos.stream().filter(a->a.getNtratou().equals("")).collect(Collectors.toList());
     }
     public String colaboradorTop(){
-
+        ArrayList<PedidodeSuporte> tops = new ArrayList<>(this.pedidos);
+        int max = 0;
+        int spot;
+        String nameOftop = "None";
+        for(PedidodeSuporte l : tops) {
+            spot = (int) tops.stream().filter(a -> a.getNtratou().equals(l.getNtratou())).count();
+            if (spot > max) {
+                max = spot;
+                nameOftop = l.getNtratou();
+            }
+        }
+        return nameOftop;
     }
     public List<PedidodeSuporte>resolvidos(LocalDateTime inicio, LocalDateTime fim){
-
+        return this.pedidos.stream().filter(a->a.getDate().isAfter(ChronoLocalDate.from(inicio)) && a.getDate().isBefore(ChronoLocalDate.from(fim)) && !a.getNtratou().equals("")).collect(Collectors.toList());
     }
     public double tempoMedioResolucao(){
-
+        DoubleStream dates = this.pedidos.stream().filter(a->!a.getNtratou().equals("")).mapToDouble(a-> ChronoUnit.MINUTES.between(a.getDate(),a.getConcluido()));
+        return dates.sum()/dates.count();
     }
     public double tempoMedioResolucao(LocalDateTime inicio, LocalDateTime fim){
-
+        DoubleStream dates = this.pedidos.stream().filter(a->!a.getNtratou().equals("") && a.getDate().isAfter(ChronoLocalDate.from(inicio)) && a.getDate().isBefore(ChronoLocalDate.from(fim))).mapToDouble(a-> ChronoUnit.MINUTES.between(a.getDate(),a.getConcluido()));
+        return dates.sum()/dates.count();
     }
     public PedidodeSuporte pedidoMaisLongo(){
-
+        ArrayList<PedidodeSuporte> l = new ArrayList<>(this.pedidos).stream().filter(a->!a.getNtratou().equals("")).sorted(Comparator.comparing(a->ChronoUnit.MINUTES.between(a.getDate(),a.getConcluido()))).collect(Collectors.toCollection(ArrayList::new));
+        Collections.reverse(l);
+        if(l.isEmpty()) return null;
+        else return l.stream().findFirst().orElse(null).clone();
     }
     public PedidodeSuporte pedidoMaisLongo(LocalDateTime inicio, LocalDateTime fim){
-
+        ArrayList<PedidodeSuporte> l = new ArrayList<>(this.pedidos).stream().filter(a->!a.getNtratou().equals("") && a.getDate().isAfter(ChronoLocalDate.from(inicio)) && a.getDate().isBefore(ChronoLocalDate.from(fim))).sorted(Comparator.comparing(a->ChronoUnit.MINUTES.between(a.getDate(),a.getConcluido()))).collect(Collectors.toCollection(ArrayList::new));
+        Collections.reverse(l);
+        if(l.isEmpty()) return null;
+        else return l.stream().findFirst().orElse(null).clone();
     }
     public PedidodeSuporte pedidoMaisCurto(){
-
+        ArrayList<PedidodeSuporte> l = new ArrayList<>(this.pedidos).stream().filter(a->!a.getNtratou().equals("")).sorted(Comparator.comparing(a->ChronoUnit.MINUTES.between(a.getDate(),a.getConcluido()))).collect(Collectors.toCollection(ArrayList::new));
+        if(l.isEmpty()) return null;
+        else return l.stream().findFirst().orElse(null).clone();
     }
     public PedidodeSuporte pedidoMaisCurto(LocalDateTime inicio, LocalDateTime fim){
-
+        ArrayList<PedidodeSuporte> l = new ArrayList<>(this.pedidos).stream().filter(a->!a.getNtratou().equals("") && a.getDate().isAfter(ChronoLocalDate.from(inicio)) && a.getDate().isBefore(ChronoLocalDate.from(fim))).sorted(Comparator.comparing(a->ChronoUnit.MINUTES.between(a.getDate(),a.getConcluido()))).collect(Collectors.toCollection(ArrayList::new));
+        if(l.isEmpty()) return null;
+        else return l.stream().findFirst().orElse(null).clone();
     }
 }
