@@ -64,17 +64,34 @@ public class LinhaDeEncomenda {
     public boolean equals(LinhaDeEncomenda lde){
         if(this == lde) return true;
         if(lde == null || this.getClass() != lde.getClass()) return false;
-        return this.getCod().equals(lde.getCod()) &&
-               this.getDesc().equals(lde.getDesc()) &&
-               this.getPreImp() == lde.getPreImp() &&
-               this.getQ() == lde.getQ() &&
-               this.getImp() == lde.getImp() &&
-               this.getDComp() == lde.getDComp();
+        LinhaDeEncomenda le = (LinhaDeEncomenda) lde;
+        return this.getCod().equals(le.getCod()) &&
+               this.getDesc().equals(le.getDesc()) &&
+               this.getPreImp() == le.getPreImp() &&
+               this.getQ() == le.getQ() &&
+               this.getImp() == le.getImp() &&
+               this.getDComp() == le.getDComp();
     }
     public String toString(){
-        return "";
+        StringBuilder sb = new StringBuilder();
+        sb.append("Referencia: ").append(this.codProd)
+          .append("\nDescricao: ").append(this.descricao)
+          .append("\nPreco antes do Imposto: ").append(this.preImposto)
+          .append("\nQuantidade: ").append(this.quantidade)
+          .append("\nImposto: ").append(this.imposto)
+          .append("\nDesconto de Comercial: ").append(this.desComercial)
+          .append("\n");
+        return sb.toString();
     }
     public LinhaDeEncomenda clone(){
         return new LinhaDeEncomenda(this);
+    }
+    public double calculaValorDesconto(){
+        double descFinal = (this.getDComp()/ 100) * this.getPreImp();
+        return descFinal;
+    }
+    public double calculaValorLinhaEnc(){
+        double precoF = this.getPreImp() * ((1 + (this.getImp() - this.getDComp()))/ 100);
+        return precoF;
     }
 }
