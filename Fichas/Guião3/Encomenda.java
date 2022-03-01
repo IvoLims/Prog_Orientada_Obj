@@ -15,7 +15,7 @@ public class Encomenda{
         this.morada = "";
         this.numEnc = 0;
         this.date = LocalDate.now();
-        this.encomenda = new LinhaDeEncomenda[];
+        this.encomenda = new LinhaDeEncomenda[0];
     }
     public Encomenda(String clienteName, int nif, String morada, int numEnc, LocalDate data, LinhaDeEncomenda[] encomenda) {
         this.clienteName = clienteName;
@@ -52,5 +52,48 @@ public class Encomenda{
         LinhaDeEncomenda[] array = new LinhaDeEncomenda[this.encomenda.length];
         for(int i = 0; i < this.encomenda.length; i++) array[i] = new LinhaDeEncomenda(this.encomenda[i]);
         return array;
+    }
+    public void setClienteName(String cliName){
+        this.clienteName = cliName;
+    }
+    public void setNIF(int nNIF){
+        this.nif = nNIF;
+    }
+    public void setMorada(String nMorada){
+        this.morada = nMorada;
+    }
+    public void setNumEnc(int nNumEnc){
+        this.numEnc = nNumEnc;
+    }
+    public void setData(LocalDate nDate){
+        this.date = nDate;
+    }
+    public void setEncomenda(LinhaDeEncomenda[] enco){
+        this.encomenda = new LinhaDeEncomenda[enco.length];
+        for(int i = 0; i < enco.length; i++) this.encomenda[i] = new LinhaDeEncomenda(enco[i]);
+    }
+    public boolean equals(Encomenda enc){
+        if(this == enc) return true;
+        if(enc == null || this.getClass() != enc.getClass()) return false;
+        Encomenda nEnc = (Encomenda) enc;
+        return this.getClienteName().equals(nEnc.getClienteName()) &&
+               this.getNIF() == nEnc.getNIF() &&
+               this.getMorada().equals(nEnc.getMorada()) &&
+               this.getNumEnc() == nEnc.getNumEnc() &&
+               this.getDate().equals(nEnc.getDate()) &&
+               this.getEncomenda().equals(nEnc.getEncomenda());
+    }
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nome do Cliente: ").append(this.clienteName)
+          .append("\n NIF: ").append(this.nif)
+          .append("\n Morada: ").append(this.morada)
+          .append("\n Num de Encomenda: ").append(this.numEnc)
+          .append("\n Data: ").append(this.date.toString())
+          .append("\n Encomendas:").append(this.encomenda.toString());
+        return sb.toString();
+    }
+    public Encomenda clone(){
+        return new Encomenda(this);
     }
 }
