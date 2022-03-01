@@ -7,7 +7,7 @@ public class Encomenda{
     private String morada;
     private int numEnc;
     private LocalDate date;
-    private LinhaDeEncomenta[] encomenda;
+    private LinhaDeEncomenda[] encomenda;
 
     public Encomenda(){
         this.clienteName = "";
@@ -15,7 +15,7 @@ public class Encomenda{
         this.morada = "";
         this.numEnc = 0;
         this.date = LocalDate.now();
-        //this.encomenda = new LinhaDeEncomenda[];
+        this.encomenda = new LinhaDeEncomenda[];
     }
     public Encomenda(String clienteName, int nif, String morada, int numEnc, LocalDate data, LinhaDeEncomenda[] encomenda) {
         this.clienteName = clienteName;
@@ -42,7 +42,7 @@ public class Encomenda{
     public String getMorada(){
         return this.morada;
     }
-    public int numEnc(){
+    public int getNumEnc(){
         return this.numEnc;
     }
     public LocalDate getDate(){
