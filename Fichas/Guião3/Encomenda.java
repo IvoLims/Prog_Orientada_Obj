@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
     
 public class Encomenda{
     private String clienteName;
@@ -95,5 +94,52 @@ public class Encomenda{
     }
     public Encomenda clone(){
         return new Encomenda(this);
+    }
+    public double calculaValorTotal(){
+        LinhaDeEncomenda[] ar = this.getEncomenda();
+        double soma = 0;
+        for(LinhaDeEncomenda lde : ar) soma+= lde.calculaValorLinhaEnc();
+        return soma;
+    }
+    public double calculaValorDesconto(){
+        LinhaDeEncomenda[] ar = this.getEncomenda();
+        double desc = 0;
+        for(LinhaDeEncomenda lde : ar) desc+=lde.calculaValorDesconto();
+        return desc;
+    }
+    public int numeroTotalProdutos(){
+        LinhaDeEncomenda[] ar = this.getEncomenda();
+        int totalProd = 0;
+        for(LinhaDeEncomenda lde: ar) totalProd+=lde.getQ();
+        return totalProd;
+    }
+    public boolean existeProdutoEncomenda(String refProduto){
+        LinhaDeEncomenda[] ar = this.getEncomenda();
+        boolean enc = false;
+        for(LinhaDeEncomenda lde: ar){
+            if(lde.getCod().equals(refProduto) && lde.getQ() > 0){
+                enc = true;
+            }
+        }
+        return enc;
+    }
+    public void adicionaLinha(LinhaDeEncomenda linha){
+        LinhaDeEncomenda[] ar = this.getEncomenda();
+        LinhaDeEncomenda[] novo = new LinhaDeEncomenda[ar.length+1];
+        System.arraycopy(ar,0,novo,0,ar.length);
+        novo[ar.length] = new LinhaDeEncomenda(linha);
+        this.setEncomenda(novo);
+    }
+    public void removeProduto(String codProd){
+        LinhaDeEncomenda[] ar = this.getEncomenda();
+        LinhaDeEncomenda[] novo = new LinhaDeEncomenda[ar.length-1];
+        int j=0;
+        for(int i = 0; i < ar.length; i++){
+            if(!ar[i].getCod().equals(codProd)){
+                novo[j] = ar[i];
+                j++;
+            }
+        }
+        System.arraycopy(novo, 0, ar, 0, novo.length);
     }
 }
