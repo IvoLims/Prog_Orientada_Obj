@@ -1,4 +1,6 @@
 public class Carro{
+    private static final double ON = 100;
+    private static final double OFF = 0;
     private String marca;
     private String modelo;
     private int ano;
@@ -13,7 +15,7 @@ public class Carro{
         this.marca = "";
         this.modelo = "";
         this.ano = 0;
-        this.consumo = 0;
+        this.consumo = 2.41;
         this.kmsTotais = 0;
         this.medConsumo = 0;
         this.kmsUlt = 0;
@@ -69,29 +71,32 @@ public class Carro{
     public double getRegen(){
         return this.regen;
     }
-    public void setMarca(){
-        
+    public void setMarca(String nMarca){
+        this.marca =  nMarca;
     }
-    public void setModelo(){
-        
+    public void setModelo(String nModelo){
+        this.modelo = nModelo;
     }
-    public void setAno(){
-        
+    public void setAno(int nAno){
+        this.ano = nAno;
     }
-    public void setConsumo(){
-        
+    public void setConsumo(double nConsumo){
+        this.consumo = nConsumo;
     }
-    public void setKMSUlt(){
-        
+    public void setKMSTotais(int nKMSTotais){
+        this.kmsTotais = nKMSTotais;
     }
-    public void setMedUltPerc(){
-        
+    public void setMedConsumo(double nMedConsumo){
+        this.medConsumo = nMedConsumo;
     }
-    public void(){
-        
+    public void setKMSUlt(int nKMSUlt){
+        this.kmsUlt = nKMSUlt;
     }
-    public void(){
-        
+    public void setMedUltPerc(double nMedUltP){
+        this.medUltP = nMedUltP;
+    }
+    public void setRegen(double nRegen){
+        this.regen= nRegen;
     }
     public boolean equals(Carro car){
         if(this == car) return true;
@@ -122,5 +127,48 @@ public class Carro{
     }
     public Carro clone(){
         return new Carro(this);
+    }
+    public void ligaCarro(){
+        this.setConsumo(ON);
+    }
+    public void desligaCarro(){
+        this.setConsumo(OFF);
+    }
+    public void resetUltimaViagem(){
+        if(this.getConsumo() != OFF){
+            this.setKMSUlt(0);
+            this.setMedConsumo(0);
+            this.setMedUltPerc(0);
+        }
+        System.out.println("Couldn't reset the values of the last trip.\n");
+    }
+    public void avancaCarro(double metros, double velocidade){
+        if(this.getConsumo() != OFF){
+            int kms = (int) metros/1000;
+            double vTotal = velocidade/100;
+            this.setKMSTotais(this.getKMSTotais() + kms);
+            this.setKMSUlt(kms);
+            if(velocidade >= 100){
+                this.setMedConsumo(this.getMedConsumo() + (kms/this.getConsumo()*vTotal));
+                this.setMedUltPerc(kms/this.getConsumo());
+            } else {
+                this.setMedConsumo(this.getMedConsumo() + ((kms/this.getConsumo()*vTotal)/2));
+                this.setMedUltPerc((kms/this.getConsumo())/2);
+            }
+        }
+        System.out.println("Couldn't change the values because the car is OFF.\n");
+    }
+    public void travaCarro(double metros){
+        if(this.getConsumo() != OFF){
+            int kms = (int) metros/1000;
+            if(kms >= 1){
+                this.setRegen(1.2*kms);
+                this.setConsumo(this.getConsumo() - this.getRegen());
+                this.setMedConsumo(this.getMedConsumo() - this.getRegen());
+            } else {
+                this.setRegen(0);
+            }
+        }
+        System.out.println("Couldn't change the values because the car is OFF.\n");
     }
 }
