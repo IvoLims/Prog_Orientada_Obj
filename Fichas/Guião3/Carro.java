@@ -137,7 +137,6 @@ public class Carro{
     public void resetUltimaViagem(){
         if(this.getConsumo() != OFF){
             this.setKMSUlt(0);
-            this.setMedConsumo(0);
             this.setMedUltPerc(0);
         }
         System.out.println("Couldn't reset the values of the last trip.\n");
@@ -149,11 +148,11 @@ public class Carro{
             this.setKMSTotais(this.getKMSTotais() + kms);
             this.setKMSUlt(kms);
             if(velocidade >= 100){
-                this.setMedConsumo(this.getMedConsumo() + (kms/this.getConsumo()*vTotal));
-                this.setMedUltPerc(kms/this.getConsumo());
+                this.setMedConsumo(this.getMedConsumo() + (kms/(this.getConsumo()*vTotal)));
+                this.setMedUltPerc(kms/(this.getConsumo()*vTotal));
             } else {
                 this.setMedConsumo(this.getMedConsumo() + ((kms/this.getConsumo()*vTotal)/2));
-                this.setMedUltPerc((kms/this.getConsumo())/2);
+                this.setMedUltPerc((kms/(this.getConsumo()*vTotal))/2);
             }
         }
         System.out.println("Couldn't change the values because the car is OFF.\n");
@@ -164,7 +163,6 @@ public class Carro{
             if(kms >= 1){
                 this.setRegen(1.2*kms);
                 this.setConsumo(this.getConsumo() - this.getRegen());
-                this.setMedConsumo(this.getMedConsumo() - this.getRegen());
             } else {
                 this.setRegen(0);
             }
