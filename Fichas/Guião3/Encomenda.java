@@ -71,7 +71,7 @@ public class Encomenda{
         this.encomenda = new LinhaDeEncomenda[enco.length];
         for(int i = 0; i < enco.length; i++) this.encomenda[i] = new LinhaDeEncomenda(enco[i]);
     }
-    public boolean equals(Encomenda enc){
+    public boolean equals(Object enc){
         if(this == enc) return true;
         if(enc == null || this.getClass() != enc.getClass()) return false;
         Encomenda nEnc = (Encomenda) enc;
