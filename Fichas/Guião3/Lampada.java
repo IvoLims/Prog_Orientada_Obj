@@ -13,15 +13,15 @@ public Lampada(int consumo,int consumoT){
         this.setConsumo(consumo);
         this.consumoT = consumoT;
 }
-public boolean equals(Lampada l){
+public boolean equals(Object l){
         if(this == l) return true;
         if(l == null || l.getClass() == this.getClass()) return false;
+        Lampada l = (Lampada) l;
         return this.consumo == l.consumo;
 }
 public Lampada clone(){
         return new Lampada(this);
 }
-
 public void lampON(){
         if(this.getConsumo() != Off){
             this.setConsumo((int) (this.getConsumo() + this.getConsumoT() * (System.currentTimeMillis() - this.getTime())));
