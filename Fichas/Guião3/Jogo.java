@@ -46,9 +46,10 @@ public class Jogo {
     public String toString() {
         return "Estado de jogo: " + this.getGameState() +"\n"+ this.resultadoActual();
     }
-    public boolean equals(Jogo j){
+    public boolean equals(Object j){
          if(j == this) return true;
          if(j == null || j.getClass() != this.getClass()) return false;
+         Jogo j = (Jogo) j;
          return j.golosC == this.golosC && j.golosV == this.golosV &&
                 this.nEquipaC.equals(j.nEquipaC) && this.nEquipaV.equals(j.nEquipaV);
     }
