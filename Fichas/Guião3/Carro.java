@@ -98,7 +98,7 @@ public class Carro{
     public void setRegen(double nRegen){
         this.regen= nRegen;
     }
-    public boolean equals(Carro car){
+    public boolean equals(Object car){
         if(this == car) return true;
         if(car == null || this.getClass() != car.getClass()) return false;
         Carro nCar = (Carro) car; 
