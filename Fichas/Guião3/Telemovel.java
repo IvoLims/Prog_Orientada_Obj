@@ -59,9 +59,10 @@ public class Telemovel {
         return sb.toString();
     }
 
-    public boolean equals(Telemovel t) {
+    public boolean equals(Object t) {
         if (t == this) return true;
         if (t == null || t.getClass() != this.getClass()) return false;
+        Telemovel t = (Telemovel) t;
         return this.getMarca().equals(t.getMarca()) && this.getModelo().equals(t.getModelo()) &&
                 this.getDisplayX() == t.getDisplayX() && this.getDisplayY() == t.getDisplayY() &&
                 this.nMens == t.nMens && this.arm == t.arm && this.armA == t.armA && this.apps == t.apps &&
