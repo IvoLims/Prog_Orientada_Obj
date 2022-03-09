@@ -61,7 +61,7 @@ public class LinhaDeEncomenda {
     public void setDComp(double newdesComp){
        this.desComercial = newdesComp;
     }
-    public boolean equals(LinhaDeEncomenda lde){
+    public boolean equals(Object lde){
         if(this == lde) return true;
         if(lde == null || this.getClass() != lde.getClass()) return false;
         LinhaDeEncomenda le = (LinhaDeEncomenda) lde;
