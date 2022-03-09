@@ -67,9 +67,10 @@ public String toString(){
     sb.append(" Dislikes: ").append(this.getNdislikes());
     return sb.toString();
 }
-public boolean equals(Youtube y){
+public boolean equals(Object y){
     if(y==this) return true;
     if(y==null || y.getClass()!=this.getClass()) return false;
+    Youtube y = (Youtube) y;
     return this.vName.equals(y.vName) && Arrays.equals(this.video,y.video) &&
            this.resolution == y.resolution && Arrays.equals(this.duration,y.duration) &&
            Arrays.equals(this.reaction,y.reaction);
