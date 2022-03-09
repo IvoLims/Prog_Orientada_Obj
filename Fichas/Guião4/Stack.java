@@ -24,9 +24,12 @@ public class Stack {
         return new Stack(this);
     }
     public String top(){
+        return this.st.get(this.st.size()-1);
+        /*
         if(!this.val.isEmpty())
            return this.val.get(this.val.size()-1);
         else return null;
+        */
     }
     public void push(String s){
         this.val.add(s);
@@ -36,6 +39,10 @@ public class Stack {
     }
     public boolean empty(){
         return this.val.isEmpty();
+        /*
+        if((this.st.size() - 1) > 0) return true;
+        else return false;
+        */
     }
     public int length(){
         return this.val.size();
