@@ -67,7 +67,7 @@ public class Ex42{
                return this.encomendas;       
        }
        public void setEncomendas(ArrayList<LinhaEncomenda> encomendas){
-              this.encomendas = new ArrayList<>();
+              this.encomendas = new ArrayList<LinhaEncomenda>();
               for(LinhaEncomenda l : encomendas) {
               this.encomendas.add(l.clone());
               }
@@ -78,6 +78,7 @@ public class Ex42{
               valorTotal += enc.calculaValorLinhaEnc();
               }
         return valorTotal;
+              //Or return this.encomendas.stream().mapToDouble(LinhaDeEncomenda::calculaValorLinhaEnc).sum();
        }
        public double calculaValorDesconto(){
               double valorDesconto = 0;
@@ -85,6 +86,7 @@ public class Ex42{
               valorDesconto += enc.calculaValorDesconto();
               }
         return valorDesconto;
+              //Or return this.encomendas.stream().mapToDouble(LinhaDeEncomenda::calculaValorDesconto).sum();
        }
        public int numeroTotalProdutos(){
               int totalProdutos = 0;
@@ -92,12 +94,14 @@ public class Ex42{
                   totalProdutos += enc.getQuantidade();
               }
         return totalProdutos;
+              //Or this.encomendas.stream().mapToInt(LinhaEncomenda::getQuantidade).sum();
        }
        public boolean existeProdutoEncomenda(String refProduto){
               for(LinhaEncomenda enc : this.encomendas)
               if(refProduto.equals(enc.getReferencia()))
                  return true;
        return false;
+              //Or return this.encomendas.stream().anyMatch(str->str.getReferencia().equals(refProduto));
        }
        public void adicionaLinha(LinhaEncomenda line) {
               this.encomendas.add(line);
