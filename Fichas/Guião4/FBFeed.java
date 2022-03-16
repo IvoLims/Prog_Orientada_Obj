@@ -7,17 +7,21 @@ import java.util.stream.Collectors;
 
 public class FBFeed {
     private ArrayList<FBPost> posts;
+    
 public FBFeed(ArrayList<FBPost> list){
+    this.posts = new ArrayList<FBPost>(list);
+    /* Also right
     this.posts = new ArrayList<FBPost>();
     for(FBPost elem : list){
         this.posts.add(elem.clone());
-    }
+    }*/
 }
 public FBFeed(){
     this(new ArrayList<FBPost>());
+    // Also right this.posts = new ArrayList<>();
 }
 public FBFeed(FBFeed fb){
-    this(fb.posts);
+    this.setPosts(fb.getPosts());
 }
 public int nrPosts(String user){
    return (int) this.posts.stream().filter(a->a.getUserName().equals(user)).count();
@@ -111,18 +115,28 @@ public List<Integer> top5CommentsExt() {
 public List<Integer> top5CommentsInt(){
        return this.posts.stream().sorted((Comparator<? super FBPost>) (p1,p2) -> p2.getComments().size()- p1.getComments().size()).limit(5).map(FBPost::getId).collect(Collectors.toList());
 }
+public ArrayList<FBPost> getPosts(){
+    return new ArrayList<FBPost>(this.posts);
+}
+public void setPosts(ArrayList<FBPost> nPosts){
+    this.posts = new ArrayList<FBPost>(nPosts);
+    /* Também certo
+    this.posts = new ArrayList<FBPost>();
+    for(FBPost fbp: nPost) this.posts.add(fbp.clone());
+    */
+}
 public boolean equals(Object f){
-       if(this == f) return true;
-       if(f == null || this.getClass() != f.getClass()) return false;
-       FBFeed fd = (FBFeed) f;
-       return this.posts.equals(fd.posts);
+    if(this == f) return true;
+    if(f == null || this.getClass() == f.getClass()) return false;
+    FBFeed fbf = (FBFeed) f;
+    return this.posts.equals(fbf.getPosts()); 
 }
 public String toString(){
-       StringBuffer sb = new StringBuffer();
-       sb.append(this.posts).append("\n");
-       return sb.toString();
+    StringBuilder sb = new StringBuilder();
+    sb.append("Posts: ").append(this.posts);    
+    return sb.toString();
 }
 public FBFeed clone(){
-       return new FBFeed(this);
+    return new FBFeed(this);
 }
 }
