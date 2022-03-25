@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 
 public class SistemadeSuporte {
-    ArrayList<PedidodeSuporte> pedidos;
+    private ArrayList<PedidodeSuporte> pedidos;
     private List<PedidodeSuporte> DoubleStream;
 
     public SistemadeSuporte(ArrayList<PedidodeSuporte> ps){
@@ -45,6 +45,13 @@ public class SistemadeSuporte {
         }
         return sb.toString();
     }
+    public ArrayList<PedidodeSuporte> getSs(){
+        return (ArrayList<PedidodeSuporte>) this.pedidos.stream().map(PedidodeSuporte::clone).collect(Collectors.toList());
+    }
+    public void setSs(ArrayList<PedidodeSuporte> pedidos){
+        this.pedidos = new ArrayList<PedidodeSuporte>();
+        this.pedidos.stream().map(PedidodeSuporte::clone).collect(Collectors.toList());
+    }
     public void inserePedido(PedidodeSuporte pedido){
         this.pedidos.add(pedido.clone());
     }
@@ -69,7 +76,16 @@ public class SistemadeSuporte {
         this.pedidos.set(i,pedido);
     }
     public List<PedidodeSuporte> resolvidos(){
-        return this.pedidos.stream().filter(a->a.getNtratou().equals("")).collect(Collectors.toList());
+        /*
+        List<PedidodeSuporte> p = new ArrayList<PedidodeSuporte>();
+        for(PedidodeSuporte pds: this.pedidos){
+            if(!(pds.getAssunto().equals("")) && (pds.getNTratou().equals(""))){
+                p.add(pds.clone());
+            }
+        }
+        return p;
+        */
+        return this.pedidos.stream().filter(a->!(a.getNtratou().equals("")) && !(a.getAssunto().equals(""))).collect(Collectors.toList());
     }
     public String colaboradorTop(){
         ArrayList<PedidodeSuporte> tops = new ArrayList<>(this.pedidos);
