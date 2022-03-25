@@ -85,7 +85,7 @@ public class SistemadeSuporte {
         }
         return p;
         */
-        return this.pedidos.stream().filter(a->!(a.getNtratou().equals("")) && !(a.getAssunto().equals(""))).collect(Collectors.toList());
+        return this.pedidos.stream().map(PedidodeSuporte::clone).filter(a->!(a.getNtratou().equals("")) && !(a.getAssunto().equals(""))).collect(Collectors.toList());
     }
     public String colaboradorTop(){
         ArrayList<PedidodeSuporte> tops = new ArrayList<>(this.pedidos);
@@ -102,14 +102,14 @@ public class SistemadeSuporte {
         return nameOftop;
     }
     public List<PedidodeSuporte>resolvidos(LocalDateTime inicio, LocalDateTime fim){
-        return this.pedidos.stream().filter(a->a.getDate().isAfter(ChronoLocalDate.from(inicio)) && a.getDate().isBefore(ChronoLocalDate.from(fim)) && !a.getNtratou().equals("")).collect(Collectors.toList());
+        return this.pedidos.stream().map(PedidodeSuporte::clone).filter(a->a.getDate().isAfter(ChronoLocalDate.from(inicio)) && a.getDate().isBefore(ChronoLocalDate.from(fim)) && !a.getNtratou().equals("")).collect(Collectors.toList());
     }
     public double tempoMedioResolucao(){
-        DoubleStream dates = this.pedidos.stream().filter(a->!a.getNtratou().equals("")).mapToDouble(a-> ChronoUnit.MINUTES.between(a.getDate(),a.getConcluido()));
+        DoubleStream dates = this.pedidos.stream().map(PedidodeSuporte::clone).filter(a->!a.getNtratou().equals("")).mapToDouble(a-> ChronoUnit.MINUTES.between(a.getDate(),a.getConcluido()));
         return dates.sum()/dates.count();
     }
     public double tempoMedioResolucao(LocalDateTime inicio, LocalDateTime fim){
-        DoubleStream dates = this.pedidos.stream().filter(a->!a.getNtratou().equals("") && a.getDate().isAfter(ChronoLocalDate.from(inicio)) && a.getDate().isBefore(ChronoLocalDate.from(fim))).mapToDouble(a-> ChronoUnit.MINUTES.between(a.getDate(),a.getConcluido()));
+        DoubleStream dates = this.pedidos.stream().map(PedidodeSuporte::clone).filter(a->!a.getNtratou().equals("") && a.getDate().isAfter(ChronoLocalDate.from(inicio)) && a.getDate().isBefore(ChronoLocalDate.from(fim))).mapToDouble(a-> ChronoUnit.MINUTES.between(a.getDate(),a.getConcluido()));
         return dates.sum()/dates.count();
     }
     public PedidodeSuporte pedidoMaisLongo(){
