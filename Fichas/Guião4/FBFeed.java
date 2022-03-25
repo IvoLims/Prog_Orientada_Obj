@@ -116,10 +116,11 @@ public List<Integer> top5CommentsInt(){
        return this.posts.stream().sorted((Comparator<? super FBPost>) (p1,p2) -> p2.getComments().size()- p1.getComments().size()).limit(5).map(FBPost::getId).collect(Collectors.toList());
 }
 public ArrayList<FBPost> getPosts(){
-    return new ArrayList<FBPost>(this.posts);
+    return (ArrayList<FBPost>) this.posts.stream().map(FBPost::clone).collect(Collectors.toList());
 }
 public void setPosts(ArrayList<FBPost> nPosts){
-    this.posts = new ArrayList<FBPost>(nPosts);
+    this.posts = new ArrayList<FBPost>();
+    this.posts.stream().map(FBPost::clone).collect(Collectors.toList());
     /* Também certo
     this.posts = new ArrayList<FBPost>();
     for(FBPost fbp: nPost) this.posts.add(fbp.clone());
