@@ -102,9 +102,31 @@ public class SistemadeSuporte {
         return nameOftop;
     }
     public List<PedidodeSuporte>resolvidos(LocalDateTime inicio, LocalDateTime fim){
+        /*
+        List<PedidodeSuporte> res = new ArrayList<>();
+        for(PedidodeSuporte pds: this.pedidos){
+            if(pds.getDate().isAfter(ini) && pds.getConcluido().isBefore(fim) && !(pds.getNTratou().equals(""))){
+                res.add(pds.clone());
+            }
+        }
+        return res;
+        */
         return this.pedidos.stream().map(PedidodeSuporte::clone).filter(a->a.getDate().isAfter(ChronoLocalDate.from(inicio)) && a.getDate().isBefore(ChronoLocalDate.from(fim)) && !a.getNtratou().equals("")).collect(Collectors.toList());
     }
     public double tempoMedioResolucao(){
+        /*
+        long tmpH = 0, tmpM = 0;
+        int numP = 0;
+        for(PedidodeSuporte pds: this.pedidos){
+            if(!(pds.getNTratou().equals(""))){
+                numP +=1;
+                tmpH += ChronoUnit.MINUTES.between(pds.getDate(), pds.getConcluido());
+                tmpM += ChronoUnit.MINUTES.between(pds.getDate(), pds.getConcluido());
+            }
+        }
+        long tmp = tmpH * 60 + tmpM;
+        return (double) tmp/numP;
+        */
         DoubleStream dates = this.pedidos.stream().map(PedidodeSuporte::clone).filter(a->!a.getNtratou().equals("")).mapToDouble(a-> ChronoUnit.MINUTES.between(a.getDate(),a.getConcluido()));
         return dates.sum()/dates.count();
     }
