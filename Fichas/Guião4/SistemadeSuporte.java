@@ -135,7 +135,7 @@ public class SistemadeSuporte {
         long tmpH = 0, tmpM = 0;
         int numP = 0;
         for(PedidodeSuporte pds: this.ped){
-            if(pds.getDate().isAfter(ini) && pds.getConcluido().isBefore(fim) && pds.getNtratou().equals("")){
+            if(pds.getDate().isAfter(ini) && pds.getConcluido().isBefore(fim) && !pds.getNtratou().equals("")){
                 numP+=1;
                 tmpH += ChronoUnit.HOURS.between(pds.getDate(), pds.getConcluido());
                 tmpM += ChronoUnit.MINUTES.between(pds.getDate(), pds.getConcluido());
@@ -148,25 +148,93 @@ public class SistemadeSuporte {
         return dates.sum()/dates.count();
     }
     public PedidodeSuporte pedidoMaisLongo(){
-        ArrayList<PedidodeSuporte> l = new ArrayList<>(this.pedidos).stream().filter(a->!a.getNtratou().equals("")).sorted(Comparator.comparing(a->ChronoUnit.MINUTES.between(a.getDate(),a.getConcluido()))).collect(Collectors.toCollection(ArrayList::new));
+        /*
+        long tmpH = 0, tmpM = 0;
+        long max = 0, val;
+        PedidodeSuporte p = new PedidodeSuporte();
+        for(PedidodeSuporte pds : this.pedidos){
+            if(!pds.getNTratou().equals("")){
+                tmpH = ChronoUnit.HOURS.between(pds.getDate(), pds.getConcluido());
+                tmpM = ChronoUnit.MINUTES.between(pds.getDate(), pds.getConcluido());
+                val = tmpH * 60 + tmpM;
+                if(max < val){
+                    max = val;
+                    p = pds;
+                }
+            }
+        }
+        return p;
+        */
+        ArrayList<PedidodeSuporte> l = new ArrayList<>(this.pedidos).stream().map(PedidodeSuporte::clone).filter(a->!a.getNtratou().equals("")).sorted(Comparator.comparing(a->ChronoUnit.MINUTES.between(a.getDate(),a.getConcluido()))).collect(Collectors.toCollection(ArrayList::new));
         Collections.reverse(l);
         if(l.isEmpty()) return null;
-        else return l.stream().findFirst().orElse(null).clone();
+        else return l.stream().findFirst().orElse(null);
     }
     public PedidodeSuporte pedidoMaisLongo(LocalDateTime inicio, LocalDateTime fim){
-        ArrayList<PedidodeSuporte> l = new ArrayList<>(this.pedidos).stream().filter(a->!a.getNtratou().equals("") && a.getDate().isAfter(ChronoLocalDate.from(inicio)) && a.getDate().isBefore(ChronoLocalDate.from(fim))).sorted(Comparator.comparing(a->ChronoUnit.MINUTES.between(a.getDate(),a.getConcluido()))).collect(Collectors.toCollection(ArrayList::new));
+        /*
+        long tmpH = 0, tmpM = 0;
+        long max = 0, val;
+        PedidodeSuporte p = new PedidodeSuporte();
+        for(PedidodeSuporte pds : this.pedidos){
+            if(!pds.getNTratou().equals("") && pds.getDate().isAfter(inicio) && pds.getConcluido().isBefore(fim)){
+                tmpH = ChronoUnit.HOURS.between(pds.getDate(), pds.getConcluido());
+                tmpM = ChronoUnit.MINUTES.between(pds.getDate(), pds.getConcluido());
+                val = tmpH * 60 + tmpM;
+                if(max < val){
+                    max = val;
+                    p = pds;
+                }
+            }
+        }
+        return p;
+        */
+        ArrayList<PedidodeSuporte> l = new ArrayList<>(this.pedidos).stream().map(PedidodeSuporte::clone).filter(a->!a.getNtratou().equals("") && a.getDate().isAfter(ChronoLocalDate.from(inicio)) && a.getDate().isBefore(ChronoLocalDate.from(fim))).sorted(Comparator.comparing(a->ChronoUnit.MINUTES.between(a.getDate(),a.getConcluido()))).collect(Collectors.toCollection(ArrayList::new));
         Collections.reverse(l);
         if(l.isEmpty()) return null;
-        else return l.stream().findFirst().orElse(null).clone();
+        else return l.stream().findFirst().orElse(null);
     }
     public PedidodeSuporte pedidoMaisCurto(){
-        ArrayList<PedidodeSuporte> l = new ArrayList<>(this.pedidos).stream().filter(a->!a.getNtratou().equals("")).sorted(Comparator.comparing(a->ChronoUnit.MINUTES.between(a.getDate(),a.getConcluido()))).collect(Collectors.toCollection(ArrayList::new));
+        /*
+        long tmpH = 0, tmpM = 0;
+        long min = Long.MAX_VALUE, val;
+        PedidodeSuporte p = new PedidodeSuporte();
+        for(PedidodeSuporte pds : this.pedidos){
+            if(!pds.getNTratou().equals("")){
+                tmpH = ChronoUnit.HOURS.between(pds.getDate(), pds.getConcluido());
+                tmpM = ChronoUnit.MINUTES.between(pds.getDate(), pds.getConcluido());
+                val = tmpH * 60 + tmpM;
+                if(max < val){
+                    max = val;
+                    p = pds;
+                }
+            }
+        }
+        return p;
+        */
+        ArrayList<PedidodeSuporte> l = new ArrayList<>(this.pedidos).stream().map(PedidodeSuporte::clone).filter(a->!a.getNtratou().equals("")).sorted(Comparator.comparing(a->ChronoUnit.MINUTES.between(a.getDate(),a.getConcluido()))).collect(Collectors.toCollection(ArrayList::new));
         if(l.isEmpty()) return null;
-        else return l.stream().findFirst().orElse(null).clone();
+        else return l.stream().findFirst().orElse(null);
     }
     public PedidodeSuporte pedidoMaisCurto(LocalDateTime inicio, LocalDateTime fim){
-        ArrayList<PedidodeSuporte> l = new ArrayList<>(this.pedidos).stream().filter(a->!a.getNtratou().equals("") && a.getDate().isAfter(ChronoLocalDate.from(inicio)) && a.getDate().isBefore(ChronoLocalDate.from(fim))).sorted(Comparator.comparing(a->ChronoUnit.MINUTES.between(a.getDate(),a.getConcluido()))).collect(Collectors.toCollection(ArrayList::new));
+        /*
+        long tmpH = 0, tmpM = 0;
+        long min = Long.MAX_VALUE, val;
+        PedidodeSuporte p = new PedidodeSuporte();
+        for(PedidodeSuporte pds : this.pedidos){
+            if(pds.getNTratou().equals("") && pds.getDate().isAfter(inicio) && pds.getConcluido().isBefore(fim)){
+                tmpH = ChronoUnit.HOURS.between(pds.getDate(), pds.getConcluido());
+                tmpM = ChronoUnit.MINUTES.between(pds.getDate(), pds.getConcluido());
+                val = tmpH * 60 + tmpM;
+                if(max < val){
+                    max = val;
+                    p = pds;
+                }
+            }
+        }
+        return p;
+        */
+        ArrayList<PedidodeSuporte> l = new ArrayList<>(this.pedidos).stream().map(PedidodeSuporte::clone).filter(a->!a.getNtratou().equals("") && a.getDate().isAfter(ChronoLocalDate.from(inicio)) && a.getDate().isBefore(ChronoLocalDate.from(fim))).sorted(Comparator.comparing(a->ChronoUnit.MINUTES.between(a.getDate(),a.getConcluido()))).collect(Collectors.toCollection(ArrayList::new));
         if(l.isEmpty()) return null;
-        else return l.stream().findFirst().orElse(null).clone();
+        else return l.stream().findFirst().orElse(null);
     }
 }
