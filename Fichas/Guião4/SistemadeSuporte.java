@@ -1,6 +1,4 @@
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -154,8 +152,8 @@ public class SistemadeSuporte {
         PedidodeSuporte p = new PedidodeSuporte();
         for(PedidodeSuporte pds : this.pedidos){
             if(!pds.getNTratou().equals("")){
-                tmpH += ChronoUnit.HOURS.between(pds.getDate(), pds.getConcluido());
-                tmpM += ChronoUnit.MINUTES.between(pds.getDate(), pds.getConcluido());
+                tmpH = ChronoUnit.HOURS.between(pds.getDate(), pds.getConcluido());
+                tmpM = ChronoUnit.MINUTES.between(pds.getDate(), pds.getConcluido());
                 val = tmpH * 60 + tmpM;
                 if(max < val){
                     max = val;
@@ -177,8 +175,8 @@ public class SistemadeSuporte {
         PedidodeSuporte p = new PedidodeSuporte();
         for(PedidodeSuporte pds : this.pedidos){
             if(!pds.getNTratou().equals("") && pds.getDate().isAfter(inicio) && pds.getConcluido().isBefore(fim)){
-                tmpH += ChronoUnit.HOURS.between(pds.getDate(), pds.getConcluido());
-                tmpM += ChronoUnit.MINUTES.between(pds.getDate(), pds.getConcluido());
+                tmpH = ChronoUnit.HOURS.between(pds.getDate(), pds.getConcluido());
+                tmpM = ChronoUnit.MINUTES.between(pds.getDate(), pds.getConcluido());
                 val = tmpH * 60 + tmpM;
                 if(max < val){
                     max = val;
@@ -200,8 +198,8 @@ public class SistemadeSuporte {
         PedidodeSuporte p = new PedidodeSuporte();
         for(PedidodeSuporte pds : this.pedidos){
             if(!pds.getNTratou().equals("")){
-                tmpH += ChronoUnit.HOURS.between(pds.getDate(), pds.getConcluido());
-                tmpM += ChronoUnit.MINUTES.between(pds.getDate(), pds.getConcluido());
+                tmpH = ChronoUnit.HOURS.between(pds.getDate(), pds.getConcluido());
+                tmpM = ChronoUnit.MINUTES.between(pds.getDate(), pds.getConcluido());
                 val = tmpH * 60 + tmpM;
                 if(min > val){
                     min = val;
@@ -222,8 +220,8 @@ public class SistemadeSuporte {
         PedidodeSuporte p = new PedidodeSuporte();
         for(PedidodeSuporte pds : this.pedidos){
             if(pds.getNTratou().equals("") && pds.getDate().isAfter(inicio) && pds.getConcluido().isBefore(fim)){
-                tmpH += ChronoUnit.HOURS.between(pds.getDate(), pds.getConcluido());
-                tmpM += ChronoUnit.MINUTES.between(pds.getDate(), pds.getConcluido());
+                tmpH = ChronoUnit.HOURS.between(pds.getDate(), pds.getConcluido());
+                tmpM = ChronoUnit.MINUTES.between(pds.getDate(), pds.getConcluido());
                 val = tmpH * 60 + tmpM;
                 if(min > val){
                     min = val;
