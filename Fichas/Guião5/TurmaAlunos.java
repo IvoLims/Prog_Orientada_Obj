@@ -1,82 +1,98 @@
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-public class TurmaAlunos {
-    private Map<String,Aluno> aluno;
-    private String turmaName;
+public class TurmaAlunos{
+    private String nT;
     private String uc;
-
-    public TurmaAlunos(Map<String,Aluno> al, String name, String codUc){
-        this.aluno = al.values().stream().collect(Collectors.toMap(Aluno :: getNumero,Aluno :: clone));
-        this.turmaName = name;
-        this.uc = codUc;
+    private Map<String, Aluno> alunos;
+    public TurmaAlunos(){
+        this("","",Collections.emptyMap());
     }
-    public TurmaAlunos(TurmaAlunos t){
-        this(t.aluno,t.turmaName,t.uc);
+    public TurmaAlunos(String t, String nUC, Map<String, Aluno> al){
+        this.nT = t;
+        this.uc = nUC;
+        this.alunos = al.values().stream().collect(Collectors.toMap(Aluno::getNumero, Aluno::clone));
+    }
+    public TurmaAlunos(TurmaAlunos tA){
+        this.nT = tA.getNturma();
+        this.uc = tA.getUC();
+        this.alunos = tA.getAlunos();
+    }
+    public boolean equals(Object ta){
+        if(this == ta) return true;
+        if(ta == null || this.getClass() != ta.getClass()) return false;
+        TurmaAlunos nA = (TurmaAlunos) ta;
+        return this.nT.equals(nA.getNturma()) &&
+               this.uc.equals(nA.getUC()) &&
+               this.alunos.equals(nA.getAlunos());
+    }
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nome da Turma: ").append(this.nT)
+          .append("\nNome da Uc: ").append(this.uc);
+        if(this.alunos.isEmpty()){
+            sb.append("\nSem Alunos.");
+        } else {
+            sb.append("\nAlunos: "); this.alunos.values().forEach(a -> sb.append(a.toString()+"\n"));
+        }
+        return sb.toString();
+    }
+    public int compareTo(Object ta){
+        if(ta.getClass() != this.getClass()) return 1;
+        TurmaAlunos nA = (TurmaAlunos) ta;
+        if(!this.nT.equals(nA.nT)) return this.nT.compareTo(nA.nT);
+        if(!this.uc.equals(nA.uc)) return this.uc.compareTo(nA.uc);
+        if(!this.alunos.equals(nA.alunos)) return this.alunos.size() - nA.alunos.size();
+        return 0;
     }
     public TurmaAlunos clone(){
         return new TurmaAlunos(this);
     }
-    public boolean equals(Object o){
-        if(this == o) return true;
-        if(o == null || this.getClass() != o.getClass()) return false;
-        TurmaAlunos tA = (TurmaAlunos) o;
-        return this.aluno.equals(tA.aluno) && this.turmaName.equals(tA.turmaName) &&
-               this.uc.equals(tA.uc);
+    public String getNturma(){
+        return this.nT;
     }
-    public int compareTo(Object o){
-        if(o.getClass() != this.getClass()) return 1;
-        TurmaAlunos tA = (TurmaAlunos) o;
-        if(!this.aluno.equals(tA.aluno)){
-            return this.aluno.size() - tA.aluno.size();
-        }
-        if(!this.turmaName.equals(tA.turmaName)){
-            return this.turmaName.compareTo(tA.turmaName);
-        }
-        if(!this.uc.equals(tA.uc)){
-            return this.uc.compareTo(tA.uc);
-        }
-        return 0;
-    }
-    public Map<String, Aluno> getAluno() {
-        return this.aluno.values().stream().collect(Collectors.toMap(Aluno::getNumero, Aluno::clone));
-    }
-    public void setAluno(Map<String,Aluno> al){
-        this.aluno = al.values().stream().collect(Collectors.toMap(Aluno::getNumero,Aluno::clone));
-    }
-    public String getTurmaName(){
-        return this.turmaName;
-    }
-    public void setTurmaName(String tN){
-        this.turmaName = tN;
-    }
-    public String getUc(){
+    public String getUC(){
         return this.uc;
     }
-    public void setUc(String codUc){
-        this.uc = codUc;
+    public Map<String, Aluno> getAlunos(){
+        return this.alunos.values().stream().collect(Collectors.toMap(Aluno::getNumero, Aluno::clone));
+    }
+    public void setNturma(String newNT){
+        this.nT = newNT;
+    }
+    public void setUC(String nUC){
+        this.uc = nUC;
+    }
+    public void setAlunos(Map<String, Aluno> al){
+        this.alunos = al.values().stream().collect(Collectors.toMap(Aluno::getNumero, Aluno::clone));
     }
     public void insereAluno(Aluno a){
-        this.aluno.put(a.getNumero(),a.clone());
+        this.alunos.put(a.getNumero(), a.clone());
     }
     public Aluno getAluno(String codAluno){
-        return this.aluno.getOrDefault(codAluno,null).clone();
+        return this.alunos.getOrDefault(codAluno, null).clone();
     }
     public void removeAluno(String codAluno){
-        this.aluno.remove(codAluno);
+        this.alunos.remove(codAluno);
     }
     public Set<String> todosOsCodigos(){
-        return this.aluno.keySet();
+        return this.alunos.keySet();
     }
     public int qtsAlunos(){
-        return this.aluno.size();
+        return this.alunos.size();
     }
     public Collection<Aluno> alunosOrdemAlfabetica(){
-        return this.aluno.values().stream().sorted().collect(Collectors.toList());
+        //compareTo in Aluno already inserts with order
+        return this.alunos.values().stream().sorted().collect(Collectors.toList());
     }
-    public Set<Aluno> alunosOrdemDescrescenteNumero(){
-        SortedSet<Aluno> s = new TreeSet<Aluno>( (a, b)-> b.getNumero().compareTo(a.getNumero()));
-        this.aluno.values().forEach(a -> s.add(a.clone()));
+    public Set<Aluno> alunosOrdemDecrescenteNumero(){
+        SortedSet<Aluno> s = new TreeSet<>((a,b) -> b.getNumero().compareTo(a.getNumero()));
+        this.alunos.values().forEach(a->s.add(a.clone()));
         return s;
     }
 }
